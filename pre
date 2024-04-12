@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Setting the tty font
 setfont ter-122n
 
@@ -20,7 +21,7 @@ mount /dev/sdb4 /mnt/home
 swapon /dev/sdb2
 
 # installing the base system
-pacstrap /mnt amd-ucode base bspwm git linux-lts linux-firmware man moc neovim networkmanager nvidia-lts opendoas playerctl pulseaudio pulseaudio-alsa pulsemixer openssh sxhkd sxiv terminus-font ttf-hanazono xorg-server man-pages xorg-xinit xorg-xprop xorg-xset xorg-xsetroot xwallpaper zathura-pdf-mupdf pop-gtk-theme pop-icon-theme xsel make pkgconf clipnotify ttf-joypixels discord dunst ffmpeg yt-dlp zip unzip mpv dash shellcheck gcc alacritty zsh bat ueberzug patch ttf-iosevka-nerd go firefox gopls fzf
+pacstrap /mnt intel-ucode base hyprland git linux-zen linux-zen-headers linux-firmware man moc neovim networkmanager opendoas wireplumber pipewire pipewire-pulse pulsemixer openssh imv terminus-font ttf-jetbrains-mono-nerd man-pages wl-clipboard zathura-pdf-mupdf  make pkgconf ttf-joypixels dunst ffmpeg yt-dlp zip unzip mpv dash gcc foot zsh bat patch ttf-iosevka-nerd firefox fzf lf
 
 # generating the fstab file
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -30,9 +31,12 @@ cp -f /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
 # downloading and putting the post chroot script to /mnt
 curl -L https://github.com/71zenith/autoarch/raw/master/post > /mnt/post
+
 # running post chroot script inside of /mnt
 arch-chroot /mnt sh post
+
 # cleanup
 rm -rf /mnt/post
+
 # rebooting the system
 reboot

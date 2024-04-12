@@ -38,31 +38,22 @@ echo -e "<match target="pattern">
 # setting up systemd-boot
 bootctl install
 echo -e "default arch.conf\ntimeout 0" > /boot/loader/loader.conf
-echo -e "title   Arch Linux\nlinux   /vmlinuz-linux-lts\ninitrd  /amd-ucode.img\ninitrd  /initramfs-linux-lts.img\noptions root=\"LABEL=Arch\" resume=\"LABEL=Swap\" rw" > /boot/loader/entries/arch.conf
+echo -e "title   Arch Linux\nlinux   /vmlinuz-linux-zen\ninitrd  /intel-ucode.img\ninitrd  /initramfs-linux-zen.img\noptions root=\"LABEL=Arch\" resume=\"LABEL=Swap\" rw" > /boot/loader/entries/arch.conf
 # setting ZDOTDIR
-echo "ZDOTDIR=/home/zen/.config/zsh" >> /etc/environment
+echo "ZDOTDIR=/home/siki/.config/zsh" >> /etc/environment
 # enabling networkmanager and cronie
 systemctl enable NetworkManager
 systemctl enable cronie.service
 # adding the user and assigning groups
-useradd -m zen -G wheel,audio,video
-# adding chaotic-aur repo and downloading packages
-pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-pacman-key --lsign-key FBA220DFC880C036
-pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-sed -e 's/CheckSpace/#CheckSpace/' -e 's/#ParallelDownloads\ =\ 5/ParallelDownloads = 10\nILoveCandy/' -e 's/#Color/Color/' -e 's/#VerbosePkgLists/VerbosePkgLists/' -e '$a [chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist' -i /etc/pacman.conf
-pacman -Sy --noconfirm polybar lf picom-ibhagwan-git vscodium vscodium-marketplace
-yes | pacman -S libxft-bgra
+useradd -m siki -G wheel,audio,video
 # setting my mkinitcpio for hibernate feature
 sed -e 's/^HOOKS.*/HOOKS=(base udev autodetect keyboard modconf block filesystems resume fsck)/' -e 's/vim.*/vim:ft=sh/' -i /etc/mkinitcpio.conf
-mkinitcpio -p linux-lts
-# downloading and putting xorg.conf to /etc/X11
-curl -L https://github.com/71zenith/autoarch/raw/master/xorg.conf > /etc/X11/xorg.conf
+mkinitcpio -p linux-zen
 # downloading post post install script and putting it in home folder of user
-curl -L https://github.com/71zenith/autoarch/raw/master/postpost > /home/zen/postpost
+# curl -L https://github.com/si-ki/autoarch/raw/master/postpost > /home/siki/postpost
 # running the script as the user
-su -c "sh /home/zen/postpost" zen
+# su -c "sh /home/siki/postpost" siki
 # changing the default shell of user to zsh
-chsh zen -s /bin/zsh
+chsh siki -s /bin/zsh
 # cleanup
-rm -rf /home/zen/{.bash_history,.bash_profile,.bash_logout,.bashrc,postpost}
+rm -rf /home/siki/{.bash_history,.bash_profile,.bash_logout,.bashrc}
