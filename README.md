@@ -5,7 +5,7 @@
 When you are in the ARCH ISO, run the following command in your terminal screen.
 
 ```sh
-curl -L https://github.com/71zenith/autoarch/raw/master/pre | sh
+curl -L https://github.com/si-ki/autoarch/raw/master/pre | sh
 ```
 
 ## Pull Request
