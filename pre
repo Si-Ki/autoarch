@@ -39,4 +39,4 @@ arch-chroot /mnt sh post
 rm -rf /mnt/post
 
 # rebooting the system
-reboot
+echo "you may now reboot"
