@@ -21,7 +21,7 @@ mount /dev/sda4 /mnt/home
 swapon /dev/sda2
 
 # installing the base system
-pacstrap /mnt intel-ucode base hyprland git linux-zen linux-zen-headers linux-firmware man moc neovim networkmanager opendoas wireplumber pipewire pipewire-pulse pulsemixer openssh imv terminus-font ttf-jetbrains-mono-nerd man-pages wl-clipboard zathura-pdf-mupdf  make pkgconf ttf-joypixels dunst ffmpeg yt-dlp zip unzip mpv dash gcc foot zsh bat patch ttf-iosevka-nerd firefox fzf lf
+pacstrap /mnt intel-ucode base hyprland git linux-zen linux-zen-headers linux-firmware neovim networkmanager opendoas wireplumber pipewire pipewire-pulse pulsemixer openssh imv terminus-font ttf-jetbrains-mono-nerd man-pages wl-clipboard zathura-pdf-mupdf make pkgconf ttf-joypixels dunst ffmpeg yt-dlp zip unzip mpv dash gcc foot zsh bat patch ttf-iosevka-nerd firefox fzf lf
 
 # generating the fstab file
 genfstab -U /mnt >> /mnt/etc/fstab
