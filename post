@@ -9,9 +9,9 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo -e "keycode 1 = Caps_Lock\nkeycode 58 = Escape" > /usr/share/kbd/keymaps/caps-esc.map
 echo -e "FONT=ter-122n\nKEYMAP=caps-esc" > /etc/vconsole.conf
 # setting the hostname
-echo "siki" >> /etc/hostname
+echo "tblx" >> /etc/hostname
 # setting the hosts file
-echo -e "127.0.0.1    localhost\n::1          localhost\n127.0.1.1    siki" >> /etc/hosts
+echo -e "127.0.0.1    localhost\n::1          localhost\n127.0.1.1    tblx" >> /etc/hosts
 # setting up doas
 echo "permit nopass :wheel" >> /etc/doas.conf
 # changing /bin/sh to dash
