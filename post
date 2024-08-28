@@ -50,9 +50,9 @@ useradd -m siki -G wheel,audio,video,storage,optical
 sed -e 's/^HOOKS.*/HOOKS=(base udev autodetect keyboard modconf block filesystems resume fsck)/' -e 's/vim.*/vim:ft=sh/' -i /etc/mkinitcpio.conf
 mkinitcpio -p linux-zen
 # downloading post post install script and putting it in home folder of user
-# curl -L https://github.com/si-ki/autoarch/raw/master/postpost > /home/siki/postpost
+curl -L https://github.com/si-ki/autoarch/raw/master/postpost > /home/siki/postpost
 # running the script as the user
-# su -c "sh /home/siki/postpost" siki
+su -c "sh /home/siki/postpost" siki
 # changing the default shell of user to zsh
 chsh siki -s /bin/zsh
 # cleanup
