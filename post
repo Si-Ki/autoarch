@@ -45,7 +45,7 @@ echo -e "title   Arch Linux\nlinux   /vmlinuz-linux-zen\ninitrd  /intel-ucode.im
 systemctl enable NetworkManager
 systemctl enable cronie.service
 # adding the user and assigning groups
-useradd -m siki -G wheel,audio,video
+useradd -m siki -G wheel,audio,video,storage,optical
 # setting my mkinitcpio for hibernate feature
 sed -e 's/^HOOKS.*/HOOKS=(base udev autodetect keyboard modconf block filesystems resume fsck)/' -e 's/vim.*/vim:ft=sh/' -i /etc/mkinitcpio.conf
 mkinitcpio -p linux-zen

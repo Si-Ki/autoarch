@@ -10,18 +10,18 @@ sed -e 's/CheckSpace/#CheckSpace/' -e 's/#ParallelDownloads\ =\ 5/ParallelDownlo
 reflector --country China,India --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
 
 # preparing the disks
-mkfs.fat -F32 /dev/sda1
-mkswap /dev/sda2 -L "Swap"
-yes | mkfs.ext4 /dev/sda3 -L "Arch"
-yes | mkfs.ext4 /dev/sda4
-mount /dev/sda3 /mnt
+mkfs.fat -F32 /dev/nvme0n1p1
+# mkswap /dev/sda2 -L "Swap"
+yes | mkfs.ext4 /dev/nvme0n1p2 -L "Arch"
+yes | mkfs.ext4 /dev/nvme0n1p3
+mount /dev/nvme0n1p2 /mnt
 mkdir /mnt/{boot,home}
-mount /dev/sda1 /mnt/boot
-mount /dev/sda4 /mnt/home
-swapon /dev/sda2
+mount /dev/nvme0n1p1 /mnt/boot
+mount /dev/nvme0n1p3 /mnt/home
+# swapon /dev/sda2
 
 # installing the base system
-pacstrap /mnt intel-ucode base hyprland git linux-zen linux-zen-headers linux-firmware neovim networkmanager opendoas wireplumber pipewire pipewire-pulse pulsemixer openssh imv terminus-font ttf-jetbrains-mono-nerd man-pages wl-clipboard zathura-pdf-mupdf make pkgconf ttf-joypixels dunst ffmpeg yt-dlp zip unzip mpv dash gcc foot zsh bat patch ttf-iosevka-nerd firefox fzf lf
+pacstrap /mnt intel-ucode base hyprland sof-firmware git linux-zen linux-zen-headers linux-firmware neovim networkmanager opendoas wireplumber pipewire pipewire-pulse pulsemixer openssh imv terminus-font ttf-jetbrains-mono-nerd man-pages wl-clipboard zathura-pdf-mupdf make pkgconf ttf-joypixels dunst ffmpeg yt-dlp zip unzip mpv dash gcc foot zsh bat patch ttf-iosevka-nerd firefox fzf lf
 
 # generating the fstab file
 genfstab -U /mnt >> /mnt/etc/fstab
