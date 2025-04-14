@@ -9,9 +9,9 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo -e "keycode 1 = Caps_Lock\nkeycode 58 = Escape" > /usr/share/kbd/keymaps/caps-esc.map
 echo -e "FONT=ter-122n\nKEYMAP=caps-esc" > /etc/vconsole.conf
 # setting the hostname
-echo "tblx" >> /etc/hostname
+echo "zenbk" >> /etc/hostname
 # setting the hosts file
-echo -e "127.0.0.1    localhost\n::1          localhost\n127.0.1.1    tblx" >> /etc/hosts
+echo -e "127.0.0.1    localhost\n::1          localhost\n127.0.1.1    zenbk" >> /etc/hosts
 # setting up doas
 echo "permit nopass :wheel" >> /etc/doas.conf
 # changing /bin/sh to dash
@@ -38,7 +38,7 @@ echo -e "<match target="pattern">
 # setting up systemd-boot
 bootctl install
 echo -e "default arch.conf\ntimeout 0" > /boot/loader/loader.conf
-echo -e "title   Arch Linux\nlinux   /vmlinuz-linux-zen\ninitrd  /intel-ucode.img\ninitrd  /initramfs-linux-zen.img\noptions root=\"LABEL=Arch\" resume=\"LABEL=Swap\" rw" > /boot/loader/entries/arch.conf
+echo -e "title   Arch Linux\nlinux   /vmlinuz-linux\ninitrd  /intel-ucode.img\ninitrd  /initramfs-linux.img\noptions root=\"LABEL=Arch\" resume=\"LABEL=Swap\" rw" > /boot/loader/entries/arch.conf
 # setting ZDOTDIR
 # echo "ZDOTDIR=/home/siki/.config/zsh" >> /etc/environment
 # enabling networkmanager and cronie
@@ -47,8 +47,8 @@ systemctl enable cronie.service
 # adding the user and assigning groups
 useradd -m siki -G wheel,audio,video,storage,optical
 # setting my mkinitcpio for hibernate feature
-sed -e 's/^HOOKS.*/HOOKS=(base udev autodetect keyboard modconf block filesystems resume fsck)/' -e 's/vim.*/vim:ft=sh/' -i /etc/mkinitcpio.conf
-mkinitcpio -p linux-zen
+# sed -e 's/^HOOKS.*/HOOKS=(base udev autodetect keyboard modconf block filesystems resume fsck)/' -e 's/vim.*/vim:ft=sh/' -i /etc/mkinitcpio.conf
+mkinitcpio -p linux
 # downloading post post install script and putting it in home folder of user
 curl -L https://github.com/si-ki/autoarch/raw/master/postpost > /home/siki/postpost
 # running the script as the user
