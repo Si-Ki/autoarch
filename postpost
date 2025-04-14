@@ -1,23 +1,18 @@
 #!/bin/bash
 # making directories
 mkdir -p ~/dwn ~/vid ~/pix ~/doc ~/.cache/zsh
-# cloning the dotfiles repo and moving it to ~/.config
-git clone https://github.com/si-ki/dotfiles.git ~/dotfiles
-cp -r ~/dotfiles/.config/* ~/.config/
-cp ~/dotfiles/.zprofile ~/.
-mv ~/dotfiles ~/.dotfiles
+# settings up dots
+alias dot='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+echo ".cfg" >> .gitignore
+git clone --bare https://github.com/si-ki/dotfiles.git ~/.cfg
+alias dot='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+dot checkout
+
 # cloning the scripts repo to ~/.local
-git clone https://github.com/si-ki/bin.git ~/.local/
-# cloning a bunch of repo
-cd ~/repos
-git clone https://github.com/si-ki/autoarch ~/doc/autoarch
-# setting prompt
-cd ~/
-# installing fzf-tab
-cd ~/
+git clone https://github.com/si-ki/bin.git ~/.local/bin
 
 # setting up the origin for push
-cd ~/.dotfiles
+cd ~/.cfg
 git remote set-url origin git@github.com:si-ki/dotfiles
 cd ~/.local/bin
 git remote set-url origin git@github.com:si-ki/bin
